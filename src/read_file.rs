@@ -12,7 +12,7 @@ pub fn read_para() {
 
     let reader = read_file("logs.txt").expect("Could not read file");
 
-    let error_count: usize = reader
+    let _error_count: usize = reader
         .lines()
         .filter_map(Result::ok)
         .par_bridge()
@@ -27,7 +27,7 @@ pub fn read_serial() {
 
     let reader = read_file("logs.txt").expect("Could not read file");
 
-    let error_count: usize = reader
+    let _error_count: usize = reader
         .lines()
         .filter_map(Result::ok)
         .filter(|line| {
