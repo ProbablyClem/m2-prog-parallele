@@ -1,4 +1,3 @@
-use rayon::prelude::*;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 
@@ -12,14 +11,19 @@ pub fn read_para() {
 
     let reader = read_file("logs.txt").expect("Could not read file");
 
-    let _error_count: usize = reader
-        .lines()
-        .filter_map(Result::ok)
-        .par_bridge()
-        .filter(|line| {
-            line.contains(target_word) // This is a stand in  for expensive line processing
+    let lines: Vec<_> = reader.lines().filter_map(Result::ok).collect();
+
+    let chunked_lines = lines.chunks(100);
+
+    let _error_count: usize = chunked_lines
+        .into_iter()
+        .map(|chunk| {
+            chunk
+                .iter()
+                .filter(|line| line.contains(target_word))
+                .count()
         })
-        .count();
+        .sum();
 }
 
 pub fn read_serial() {
