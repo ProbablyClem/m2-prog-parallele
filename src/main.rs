@@ -6,11 +6,11 @@ fn main() {
     // We read the file a first time to warm up the cache
 
     let start = Instant::now();
-    read_file::read_file("logs.txt").expect("Could not read file");
+    read_file::read_lines("logs.txt").expect("Could not read file");
     let duration = start.elapsed();
     println!("Time elapsed warmup is: {:?}", duration);
 
-    let nb_iter = 1000;
+    let nb_iter = 10;
     let serial_mean = (0..nb_iter)
         .map(|_| bench_serial())
         .fold(Duration::ZERO, |acc, x| acc + x)
