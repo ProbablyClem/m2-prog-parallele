@@ -2,7 +2,7 @@
 ## Goupe
 - GUITON Clément
 - CHEMIN Bastien
-- AZOUZ Théo
+- AZOUZ Theo
 - AOUN Yorgo
 
 ## Technologies
